@@ -1,0 +1,35 @@
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<style>
+    body {
+        font-size: 24px;
+    }
+    .chk{
+        display: inline-block;
+        width: 100px;
+        background: linear-gradient(86deg, #d7d4ff, #e4e4e4);
+        padding: 4px;
+        border-radius: 10px;
+        margin: 4px;
+    }
+</style>
+<script>
+showAlert=function() {
+    var elm = $('<span id="alert1" title="You have not selected a user type." role="alert">You have not selected a user type</span>');
+    $('h4 center').append(elm);
+    setTimeout(function(){ $('#alert1').remove(); }, 5000);
+}
+</script>
+<h4><center>&nbsp;</center>
+</h4>
+<div style="width: 500px; text-align: center; margin: 50px auto;">
+    <h3 role="main">Which one of the following describes you better?</h3>
+    <div>
+        <span class="chk" role="checkbox" title="Choose this if you are a borrower" tabindex="1">I'm a borrower</span>
+        <span class="chk" role="checkbox" title="Choose this if you are a co-borrower" tabindex="2">I'm a co-borrower</span>
+    </div>
+    <div style="text-align: right"><button onclick="showAlert();" role="button" title="Click here to save and continue">Save and Continue</button></div>
+</div>
+
+<!-- <span role="checkbox" aria-checked="false" tabindex="0" aria-labelledby="chk1-label"></span> 
+<input type="checkbox" id="chk1-label">
+<label for="chk1-label">Remember my preferences</label> -->
