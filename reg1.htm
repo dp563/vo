@@ -3,7 +3,7 @@
     body {
         font-size: 24px;
     }
-    .chk{
+    .chk {
         display: inline-block;
         width: 100px;
         background: linear-gradient(86deg, #d7d4ff, #e4e4e4);
@@ -11,23 +11,52 @@
         border-radius: 10px;
         margin: 4px;
     }
+    .chk[aria-checked=true] {
+        color: red;
+    }
 </style>
 <script>
+    $(function(){
+        $('.chk').click(handleChk).keydown(handleChk);
+    });
+    function handleChk(o){
+        if(o.type == 'click' || (o.type == 'keydown' && o.originalEvent.keyCode == 13)){
+            $('.chk').attr('aria-checked', 'false');
+            var chk = $(o.target);
+            chk.attr('aria-checked', chk.attr('aria-checked') == 'false' ? 'true' : 'false');
+        }
+    }
 showAlert=function() {
-    var elm = $('<span id="alert1" title="You have not selected a user type." role="alert">You have not selected a user type</span>');
+    var msg = '';
+    if($('.chk[aria-checked=true').length == 0)
+    {
+        msg  ='You have not selected a user type.';
+    }
+    else if($('#chkb').attr('aria-checked')=='true'){
+        msg = 'okay, you are a borrower.';
+    }
+    else{msg= 'okay, you are a co-borrower';}
+    var elm = $('<span style="margin: 0 5px;" id="alert1" title="'+msg+'" role="alert">'+msg+'</span>');
     $('h4 center').append(elm);
-    setTimeout(function(){ $('#alert1').remove(); }, 5000);
+    setTimeout(function(){ elm.remove(); }, 5000);
+
 }
 </script>
 <h4><center>&nbsp;</center>
 </h4>
 <div style="width: 500px; text-align: center; margin: 50px auto;">
-    <h3 role="main">Which one of the following describes you better?</h3>
-    <div>
-        <span class="chk" role="checkbox" title="Choose this if you are a borrower" tabindex="1">I'm a borrower</span>
-        <span class="chk" role="checkbox" title="Choose this if you are a co-borrower" tabindex="2">I'm a co-borrower</span>
+    <div tabindex="1" role="contentinfo">
+        &nbsp;
+        <h2>Registration screen 1 of 12</h2>
+        <p>Which one of the following describes you better?</p>
     </div>
-    <div style="text-align: right"><button onclick="showAlert();" role="button" title="Click here to save and continue">Save and Continue</button></div>
+    <div>
+        <span id="chkb" aria-checked="false" class="chk" role="checkbox" title="Choose this if you are a borrower" tabindex="2">I'm a borrower</span>
+        <span id="chkcb" aria-checked="false" class="chk" role="checkbox" title="Choose this if you are a co-borrower" tabindex="3">I'm a co-borrower</span>
+    </div>
+    <div style="text-align: right">
+        <button tabindex="4" onclick="showAlert();" role="button" title="Click here to save and continue">Save and Continue</button>
+    </div>
 </div>
 
 <!-- <span role="checkbox" aria-checked="false" tabindex="0" aria-labelledby="chk1-label"></span> 
